@@ -3,22 +3,25 @@
 
 #include <qmesh.h>
 #include <QMouseEvent>
+#include <QComponent>
 
-class SmartObject: public SmartObject
+class SmartObject: public Qt3DRender::QMesh
 {
     Q_OBJECT
+
 public:
-    explicit SmartObject(Qt3DRender::QMesh *parent = nullptr);
+    SmartObject();
     ~SmartObject();
+
+    int id;
+    Qt3DCore::QEntity *entity;
 
 public slots:
     void setId(int id);
     int getId();
-    void setSource(QUrl *url);
-    float getLocal();
-
-    int id;
-
+    void setSource(QUrl url);
+    Qt3DCore::QEntity getParentEntity();
+    void setParentEntity(Qt3DCore::QEntity *entity);
 private:
     QVector2D getPos(QMatrix projectionMatrix, QMatrix viewMatrix, QVector3D point3D, QVector2D viewSize, QVector2D viewOffset);
 };
