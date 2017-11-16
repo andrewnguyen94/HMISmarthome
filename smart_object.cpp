@@ -23,6 +23,16 @@ int SmartObject::getId()
     return this->id;
 }
 
+void SmartObject::setName(char *name_object)
+{
+    this->name = name_object;
+}
+
+char *SmartObject::getName()
+{
+    return this->name;
+}
+
 //set source method for object. Load the mesh from obj, fbx file
 void SmartObject::setSource(QUrl url)
 {
@@ -30,15 +40,49 @@ void SmartObject::setSource(QUrl url)
 }
 
 //get the entity that wrap the mesh
-Qt3DCore::QEntity SmartObject::getParentEntity()
+Qt3DCore::QEntity* SmartObject::getParentEntity()
 {
     return entity;
 }
 
 //set the entity that wrap the mesh
-void SmartObject::setParentEntity(Qt3DCore::QEntity *entity)
+void SmartObject::setParentEntity(Qt3DCore::QEntity *entity_parent)
 {
-    this->entity = entity;
+    entity = entity_parent;
+}
+
+Qt3DCore::QTransform *SmartObject::createTransform()
+{
+    Qt3DCore::QTransform *new_transform;
+    new_transform = new Qt3DCore::QTransform();
+    return new_transform;
+}
+
+void SmartObject::setTransform(Qt3DCore::QTransform *transform_add)
+{
+    transform = transform_add;
+}
+
+Qt3DCore::QTransform *SmartObject::getTransform()
+{
+    return transform;
+}
+
+Qt3DRender::QMaterial *SmartObject::createMaterial()
+{
+    Qt3DRender::QMaterial *new_material;
+    new_material = new Qt3DRender::QMaterial();
+    return new_material;
+}
+
+void SmartObject::setMaterial(Qt3DRender::QMaterial *material_set)
+{
+    material = material_set;
+}
+
+Qt3DRender::QMaterial *SmartObject::getMaterial()
+{
+    return material;
 }
 
 //convert mesh's world coordinates into window coordinates and return the location of mesh on window coordinates

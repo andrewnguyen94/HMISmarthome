@@ -26,10 +26,11 @@ public:
 public slots:
     void addMesh(SmartObject *smart);
     void deleteMesh(SmartObject *smart);
+    void setTransform();
 
 private:
     Qt3DCore::QEntity *m_rootEntity;
-    Qt3DCore::QEntity addMeshEntity();
+    Qt3DCore::QEntity* addMeshEntity();
     void deleteMeshEntity(Qt3DCore::QEntity *entity);
 };
 

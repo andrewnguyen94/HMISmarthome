@@ -12,5 +12,6 @@ HEADERS += \
     smart_object.h \
     view_3d_window.h \
     scene.h \
-    utils.h
+    utils.h \
+    view.h
 
