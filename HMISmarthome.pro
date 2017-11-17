@@ -6,12 +6,15 @@ SOURCES += \
     smart_object.cpp \
     view_3d_window.cpp \
     scene.cpp \
-    utils.cpp
+    utils.cpp \
+    arraylist.cpp
 
 HEADERS += \
     smart_object.h \
     view_3d_window.h \
     scene.h \
     utils.h \
-    view.h
+    view.h \
+    treecombo.h \
+    arraylist.h
 
