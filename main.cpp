@@ -6,9 +6,10 @@
 #include "view_3d_window.h"
 #include "scene.h"
 #include "treecombo.h"
-
+#include "arraylist.h"
 
 int main(int argc, char **argv){
+    std::vector <string> labels;
     QApplication app(argc, argv);
     Qt3DExtras::Qt3DWindow *view = new Qt3DExtras::Qt3DWindow();
     view->defaultFrameGraph()->setClearColor(QColor(QRgb(0x4d4d4f)));
@@ -48,7 +49,16 @@ int main(int argc, char **argv){
     view->setRootEntity(rootEntity);
 
     QComboBox *smart_object_labels = new QComboBox();
-    smart_object_labels->addItem();
+    labels.push_back("air conditional");
+    labels.push_back("television");
+    labels.push_back("lights");
+    for(int i = 0; i < labels.size(); i++){
+        QString str = QString::fromUtf8(labels[i].c_str());
+        smart_object_labels->addItem(str);
+    }
 
     return app.exec();
 }
+
+
+

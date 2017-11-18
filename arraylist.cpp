@@ -1,12 +1,19 @@
 #include "arraylist.h"
 #include <iostream>
 
-void ArrayList::delNode(QObject *obj)
+int ArrayList::size()
 {
-
+    int count = 0;
+    Node *cur = new Node;
+    cur = head;
+    while(cur->next != NULL){
+        cur = cur->next;
+        count++;
+    }
+    return count;
 }
 
-void ArrayList::createNode(QObject obj)
+void ArrayList::createNode(std::basic_string<char,std::char_traits<char>,std::allocator<char>> obj)
 {
     Node *temp = new Node;
     temp->m_data = obj;
@@ -22,15 +29,15 @@ void ArrayList::createNode(QObject obj)
     }
 }
 
-void ArrayList::insert_start(QObject obj)
+void ArrayList::insert_start(std::basic_string<char,std::char_traits<char>,std::allocator<char>> obj)
 {
     Node *tmp = new Node;
-    tmp->m_data = QObject;
+    tmp->m_data = obj;
     tmp->next = head;
     head = tmp;
 }
 
-void ArrayList::insert_position(QObject obj, int pos)
+void ArrayList::insert_position(std::basic_string<char,std::char_traits<char>,std::allocator<char>> obj, int pos)
 {
     Node *prev = new Node;
     Node *cur = new Node;

@@ -10,13 +10,12 @@ public:
     ArrayList(){
         head = NULL;
         tail = NULL;
-    };
+    }
     bool empty();
     int size();
-    void delNode(QObject *obj);
-    void createNode(QObject obj);
-    void insert_start(QObject obj);
-    void insert_position(QObject obj, int pos);
+    void createNode(std::basic_string<char,std::char_traits<char>,std::allocator<char>> obj);
+    void insert_start(std::basic_string<char,std::char_traits<char>,std::allocator<char>> obj);
+    void insert_position(std::basic_string<char,std::char_traits<char>,std::allocator<char>> obj, int pos);
     void delete_first();
     void delete_last();
     void delete_position(int pos);
@@ -24,7 +23,7 @@ public:
 private:
     struct Node
     {
-        QObject m_data;
+        std::basic_string<char,std::char_traits<char>,std::allocator<char>> m_data;
         Node *next;
     };
     Node *head;
