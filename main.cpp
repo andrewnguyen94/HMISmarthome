@@ -48,7 +48,7 @@ int main(int argc, char **argv){
     Scene *scene = new Scene(rootEntity);
     view->setRootEntity(rootEntity);
 
-    QComboBox *smart_object_labels = new QComboBox();
+    QComboBox *smart_object_labels = new QComboBox(widget);
     labels.push_back("air conditional");
     labels.push_back("television");
     labels.push_back("lights");
@@ -56,6 +56,7 @@ int main(int argc, char **argv){
         QString str = QString::fromUtf8(labels[i].c_str());
         smart_object_labels->addItem(str);
     }
+    vLayout->addWidget(smart_object_labels);
 
     return app.exec();
 }
