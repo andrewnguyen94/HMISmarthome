@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "smart_object.h"
+#include "view_3d_window.h"
 
 #include <QtCore/QDebug>
 #include <QMouseEvent>

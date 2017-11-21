@@ -11,17 +11,23 @@ public:
     explicit View3DWindow(QWidget *parent = nullptr);
     ~View3DWindow();
 
-private:
-    Qt3DExtras::Qt3DWindow *view;
-
-public slots:
-
-protected:
     void mouseMoveEvent(QMouseEvent *ev) override;
     void mouseDoubleClickEvent(QMouseEvent *ev) override;
     void mousePressEvent(QMouseEvent *ev) override;
     void mouseReleaseEvent(QMouseEvent *ev) override;
 
+    int x_move,y_move,x_press,y_press,x_doubleclick,y_doubleclick,x_release,y_release;
+
+private:
+    Qt3DExtras::Qt3DWindow *view;
+
+public slots:
+
+signals:
+    void on_MouseMove();
+    void on_MouseDoubleClick();
+    void on_MousePress();
+    void on_MouseRelease();
 
 };
 
