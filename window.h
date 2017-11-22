@@ -1,6 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "glwidget.h"
+
 #include <qwidget.h>
 
 class MainWindow;
@@ -13,6 +15,7 @@ public:
 
 private:
     MainWindow *mainWindow;
+    GlWidget *glwidget;
 };
 
 #endif // WINDOW_H
