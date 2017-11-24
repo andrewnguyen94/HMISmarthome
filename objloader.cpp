@@ -61,6 +61,17 @@ bool ObjLoader::loadObj(const char *path, std::vector<glm::vec3> &out_vertices, 
                 glm::vec3 vertex = temp_vertices[vertexIndex - 1];
                 out_vertices.push_back(vertex);
             }
+
+            for(unsigned int i = 0; i < uvIndices.size(); i++){
+                unsigned int uvIndex = uvIndices[i];
+                glm::vec2 uv = temp_uvs[uvIndex - 1];
+                out_uvs.push_back(uv);
+            }
+            for(unsigned int i = 0; i < normalIndices.size(); i++){
+                unsigned int nmIndex = normalIndices[i];
+                glm::vec3 nm = temp_normals[nmIndex - 1];
+                out_normals.push_back(nm);
+            }
         }
     }
 

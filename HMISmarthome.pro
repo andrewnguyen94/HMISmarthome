@@ -23,7 +23,8 @@ SOURCES += \
     utils.cpp \
     view_3d_window.cpp \
     window.cpp \
-    objloader.cpp
+    objloader.cpp \
+    lightbulb.cpp
 
 HEADERS += \
     smart_object.h \
@@ -189,4 +190,5 @@ HEADERS += \
     utils.h \
     view.h \
     view_3d_window.h \
-    window.h
+    window.h \
+    lightbulb.h
