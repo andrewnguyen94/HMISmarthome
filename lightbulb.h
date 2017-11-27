@@ -18,21 +18,27 @@ public:
 
     const GLfloat *constData() const { return m_data.constData(); }
     int count() const { return m_count; }
-    int vertexCount() const { return m_count / 6; }
+    int vertexCount() const { return m_count / 8; }
 
     void drawLighBulb(QOpenGLShaderProgram *program);
 
 private:
-
+    void setNameObject(QString name);
+    QString getNameObject();
+    void setObjectId(int id);
+    int getObjectId();
     void initLighBulbGeometry();
+    void setupVertexAttribs();
+
     QOpenGLBuffer arrayBuf;
-    QOpenGLBuffer indexBuf;
 
     std::vector<glm::vec3> out_vertices;
     std::vector<glm::vec2> out_uvs;
     std::vector<glm::vec3> out_normals;
     QVector<GLfloat> m_data;
     int m_count;
+    QString name_object;
+    int object_id;
 
 protected:
 };

@@ -1,6 +1,8 @@
 #include "lightbulb.h"
 #include <iostream>
 #include <vector>
+#include <QVector>
+#include <qopengl.h>
 
 struct VertexData
 {
@@ -16,18 +18,34 @@ LightBulb::LightBulb(std::vector<glm::vec3> out_vertices, std::vector<glm::vec2>
     this->out_uvs = out_uvs;
     this->out_normals = out_normal;
     this->m_count = 0;
+    this->arrayBuf.create();
 
     initLighBulbGeometry();
 }
 
 LightBulb::~LightBulb()
 {
-
+    this->arrayBuf.destroy();
 }
 
-void LightBulb::drawLighBulb(QOpenGLShaderProgram *program)
+void LightBulb::setNameObject(QString name)
 {
+    this->name_object = name;
+}
 
+QString LightBulb::getNameObject()
+{
+    return name_object;
+}
+
+void LightBulb::setObjectId(int id)
+{
+    this->object_id = id;
+}
+
+int LightBulb::getObjectId()
+{
+    return object_id;
 }
 
 void LightBulb::initLighBulbGeometry()
@@ -47,6 +65,19 @@ void LightBulb::initLighBulbGeometry()
         *p++ = this->out_normals[i].z;
         m_count += 8;
     }
+    arrayBuf.bind();
+    arrayBuf.allocate(constData(), count() * sizeof(GLfloat));
+}
+
+void LightBulb::setupVertexAttribs()
+{
+
+}
+
+void LightBulb::drawLighBulb(QOpenGLShaderProgram *program)
+{
+    arrayBuf.bind();
+
 }
 
 
