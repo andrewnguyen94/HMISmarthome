@@ -192,3 +192,8 @@ HEADERS += \
     view_3d_window.h \
     window.h \
     lightbulb.h
+
+DISTFILES +=
+
+RESOURCES += \
+    shader.qrc

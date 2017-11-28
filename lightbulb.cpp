@@ -76,8 +76,13 @@ void LightBulb::setupVertexAttribs()
 
 void LightBulb::drawLighBulb(QOpenGLShaderProgram *program)
 {
+    // Tell OpenGL which VBOs to use
     arrayBuf.bind();
 
-}
+    // Offset for position
+    quintptr offset = 0;
+
+    //Tell OpenGL programmable pipeline how to locate vertex position data
+    int a_position =
 
 
