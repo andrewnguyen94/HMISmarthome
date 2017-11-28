@@ -78,3 +78,23 @@ float GlWidget::getFov()
 {
     return fov;
 }
+
+void GlWidget::setProjMatrix(QMatrix4x4 m_proj)
+{
+    this->m_proj = m_proj;
+}
+
+QMatrix4x4 GlWidget::getProjMatrix()
+{
+    return m_proj;
+}
+
+void GlWidget::setCameraMatrix(QMatrix4x4 m_camera)
+{
+    this->m_camera = m_camera;
+}
+
+QMatrix4x4 GlWidget::getCameraMatrix()
+{
+    return m_camera;
+}
