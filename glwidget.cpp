@@ -98,3 +98,33 @@ QMatrix4x4 GlWidget::getCameraMatrix()
 {
     return m_camera;
 }
+
+void GlWidget::initializeGL()
+{
+
+}
+
+void GlWidget::paintGL()
+{
+
+}
+
+void GlWidget::mouseMoveEvent(QMouseEvent *event)
+{
+
+}
+
+void GlWidget::mousePressEvent(QMouseEvent *event)
+{
+
+}
+
+void GlWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+
+}
+
+void GlWidget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+
+}

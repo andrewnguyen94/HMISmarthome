@@ -41,7 +41,12 @@ private:
     float x_camera, y_camera, z_camera;
     int m_projMatrixLoc, m_mvMatrixLoc;
 protected:
-
+    void initializeGL() override;
+    void paintGL() override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
 signals:
 
 };

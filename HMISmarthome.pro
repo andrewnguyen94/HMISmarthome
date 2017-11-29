@@ -24,7 +24,8 @@ SOURCES += \
     view_3d_window.cpp \
     window.cpp \
     objloader.cpp \
-    lightbulb.cpp
+    lightbulb.cpp \
+    coordinate_axis.cpp
 
 HEADERS += \
     smart_object.h \
@@ -191,7 +192,8 @@ HEADERS += \
     view.h \
     view_3d_window.h \
     window.h \
-    lightbulb.h
+    lightbulb.h \
+    coordinate_axis.h
 
 DISTFILES +=
 

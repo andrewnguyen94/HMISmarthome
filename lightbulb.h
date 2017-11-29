@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
+#include <qvector3d.h>
 
 using namespace std;
 
@@ -29,6 +30,7 @@ private:
     int getObjectId();
     void initLighBulbGeometry();
     void setupVertexAttribs();
+    QVector3D get_average_vector();
 
     QOpenGLBuffer arrayBuf;
 

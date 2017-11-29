@@ -74,6 +74,29 @@ void LightBulb::setupVertexAttribs()
 
 }
 
+QVector3D LightBulb::get_average_vector()
+{
+    float avg_x, avg_y, avg_z;
+    float tmp_x = 0.0f;
+    float tmp_y = 0.0f;
+    float tmp_z = 0.0f;
+    float tmp = 0.0f;
+    for(unsigned int i = 0; i < this->out_vertices.size(); i++){
+        tmp_x += this->out_vertices[i].x * sqrt(pow(this->out_vertices[i].x,2) + pow(this->out_vertices[i].y,2
+                                                + pow(this->out_vertices[i].z,2)));
+        tmp += sqrt(pow(this->out_vertices[i].x,2) + pow(this->out_vertices[i].y,2
+                        + pow(this->out_vertices[i].z,2)));
+        tmp_y += this->out_vertices[i].y * sqrt(pow(this->out_vertices[i].x,2) + pow(this->out_vertices[i].y,2
+                                                + pow(this->out_vertices[i].z,2)));
+        tmp_z += this->out_vertices[i].z * sqrt(pow(this->out_vertices[i].x,2) + pow(this->out_vertices[i].y,2
+                                                + pow(this->out_vertices[i].z,2)));
+    }
+    avg_x = tmp_x/tmp;
+    avg_y = tmp_y/tmp;
+    avg_z = tmp_z/tmp;
+    return QVector3D(avg_x, avg_y, avg_z);
+}
+
 void LightBulb::drawLighBulb(QOpenGLShaderProgram *program)
 {
     // Tell OpenGL which VBOs to use
