@@ -3,7 +3,10 @@
 
 
 GlWidget::GlWidget(QWidget *parent)
-    : QOpenGLWidget(parent)
+    : QOpenGLWidget(parent),
+      far_plane(1000.0f),
+      near_plane(0.01f),
+      fov(45.0f)
 {
 
 }
