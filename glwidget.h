@@ -26,8 +26,8 @@ public:
     float getFarPlane();
     void setFov(float fov);
     float getFov();
-    void setProjMatrix(QMatrix4x4 m_proj);
-    QMatrix4x4 getProjMatrix();
+    void setProjMatrix(QMatrix4x4 *m_proj);
+    QMatrix4x4 *getProjMatrix();
     void setCameraMatrix(QMatrix4x4 m_camera);
     QMatrix4x4 getCameraMatrix();
 
@@ -35,7 +35,7 @@ public slots:
 
 private:
     QMatrix4x4 m_camera;
-    QMatrix4x4 m_proj;
+    QMatrix4x4 *m_proj;
     QMatrix4x4 m_world;
     float near_plane, far_plane, fov;
     float x_camera, y_camera, z_camera;

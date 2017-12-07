@@ -1,44 +1,52 @@
 #ifndef SMART_OBJECT_H
 #define SMART_OBJECT_H
 
-#include <qmesh.h>
-#include <QMouseEvent>
-#include <QComponent>
-#include <qentity.h>
-#include <qtransform.h>
-#include <QMaterial>
+#include <qvector.h>
+#include <qopengl.h>
+#include <qopenglbuffer.h>
+#include <qopenglvertexarrayobject.h>
+#include <qopenglfunctions.h>
+#include <qopenglshaderprogram.h>
+#include <glm/glm.hpp>
 
-class SmartObject: public Qt3DRender::QMesh
+class SmartObject : protected QOpenGLFunctions
 {
-    Q_OBJECT
-
 public:
-    SmartObject();
+    SmartObject(QOpenGLFunctions *f, QMatrix4x4 *world,QMatrix4x4 *camera, QMatrix4x4 *proj,
+                std::vector<glm::vec3> out_vertices, std::vector<glm::vec2> out_uvs, std::vector<glm::vec3> out_normal);
     ~SmartObject();
 
-    int id;
-    Qt3DCore::QEntity *entity;
-    char *name;
-    Qt3DCore::QTransform *transform;
-    Qt3DRender::QMaterial *material;
-
-public slots:
-    void setId(int id);
-    int getId();
-    void setName(char *name_object);
-    char* getName();
-    void setSource(QUrl url);
-    Qt3DCore::QEntity* getParentEntity();
-    void setParentEntity(Qt3DCore::QEntity *entity_parent);
-    Qt3DCore::QTransform* createTransform();
-    void setTransform(Qt3DCore::QTransform* transform_add);
-    Qt3DCore::QTransform* getTransform();
-    Qt3DRender::QMaterial *createMaterial();
-    void setMaterial(Qt3DRender::QMaterial *material_set);
-    Qt3DRender::QMaterial* getMaterial();
+    const GLfloat *constData() const { return m_data.constData(); }
+    int count() const { return m_count; }
+    int vertexCount() const { return m_count / 8; }
 
 private:
-    QVector2D getPos(QMatrix projectionMatrix, QMatrix viewMatrix, QVector3D point3D, QVector2D viewSize, QVector2D viewOffset);
+    void addShaderFromSourceCode(int type, const char *source);
+    void addShaderFromFile(int type, const char *path);
+    int setLocationShaderAtrrs(const char *shader_attrs);
+    QOpenGLShaderProgram *getShaderProgram();
+    void initObjectGeometry();
+    QOpenGLBuffer *getArrayBuf();
+
+    void draw(const char *drawMode);
+
+    QVector<GLfloat> m_data;
+    QOpenGLBuffer *arrayBuf;
+    int m_count;
+    QOpenGLVertexArrayObject m_vao;
+    QOpenGLFunctions *function;
+    QOpenGLShaderProgram *m_program;
+    int m_projMatrixLoc;
+    int m_mvMatrixLoc;
+    int m_normalMatrixLoc;
+    int m_lightPosLoc;
+    QMatrix4x4 *m_proj;
+    QMatrix4x4 *m_camera;
+    QMatrix4x4 *m_world;
+    bool m_transparent;
+    std::vector<glm::vec3> out_vertices;
+    std::vector<glm::vec2> out_uvs;
+    std::vector<glm::vec3> out_normals;
 };
 
-#endif // SMART_OBJECT_H
+#endif

@@ -4,25 +4,14 @@ QT += core gui opengl
 
 SOURCES += \
     main.cpp \
-    smart_object.cpp \
     view_3d_window.cpp \
-    scene.cpp \
-    utils.cpp \
     arraylist.cpp \
     mainwindow.cpp \
     window.cpp \
     glwidget.cpp \
-    glm/detail/dummy.cpp \
-    glm/detail/glm.cpp \
     arraylist.cpp \
-    glwidget.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    scene.cpp \
     smart_object.cpp \
     utils.cpp \
-    view_3d_window.cpp \
-    window.cpp \
     objloader.cpp \
     lightbulb.cpp \
     coordinate_axis.cpp
@@ -30,10 +19,8 @@ SOURCES += \
 HEADERS += \
     smart_object.h \
     view_3d_window.h \
-    scene.h \
     utils.h \
     view.h \
-    treecombo.h \
     arraylist.h \
     mainwindow.h \
     window.h \
@@ -185,9 +172,7 @@ HEADERS += \
     glwidget.h \
     mainwindow.h \
     objloader.h \
-    scene.h \
     smart_object.h \
-    treecombo.h \
     utils.h \
     view.h \
     view_3d_window.h \

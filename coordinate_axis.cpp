@@ -95,5 +95,5 @@ void Coordinate_Axis::drawCoordinateAxisGeometry()
     m_program->setUniformValue(m_mvMatrixLoc, m_camera * m_world);
     QMatrix3x3 normalMatrix = m_world.normalMatrix();
     m_program->setUniformValue(m_normalMatrixLoc, normalMatrix);
-    glDrawArrays(GL_LINES, 0, m_logo.vertexCountLine());
+    glDrawArrays(GL_LINES, 0, vertexCount());
 }

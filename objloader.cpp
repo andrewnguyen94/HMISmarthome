@@ -1,6 +1,5 @@
 #include "objloader.h"
 #include <glm/glm.hpp>
-#include <gl/GLU.h>
 #include <iostream>
 
 ObjLoader::ObjLoader(){

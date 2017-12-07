@@ -1,6 +1,12 @@
 #include "arraylist.h"
 #include <iostream>
 
+ArrayList::ArrayList()
+{
+    head = NULL;
+    tail = NULL;
+}
+
 int ArrayList::size()
 {
     int count = 0;

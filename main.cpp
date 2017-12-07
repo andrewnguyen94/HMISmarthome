@@ -5,8 +5,6 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#include "scene.h"
-#include "treecombo.h"
 #include "arraylist.h"
 #include "mainwindow.h"
 

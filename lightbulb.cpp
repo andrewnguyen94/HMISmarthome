@@ -4,14 +4,8 @@
 #include <QVector>
 #include <qopengl.h>
 
-struct VertexData
-{
-    QVector3D position;
-    QVector2D texCoord;
-    QVector3D normal;
-};
-
-LightBulb::LightBulb(std::vector<glm::vec3> out_vertices, std::vector<glm::vec2> out_uvs, std::vector<glm::vec3> out_normal)
+LightBulb::LightBulb(std::vector<glm::vec3> out_vertices, std::vector<glm::vec2> out_uvs, std::vector<glm::vec3> out_normal,
+                     QOpenGLFunctions *f, QMatrix4x4 *world,QMatrix4x4 *camera)
 {
     initializeOpenGLFunctions();
     this->out_vertices = out_vertices;
@@ -106,6 +100,6 @@ void LightBulb::drawLighBulb(QOpenGLShaderProgram *program)
     quintptr offset = 0;
 
     //Tell OpenGL programmable pipeline how to locate vertex position data
-    int a_position =
+}
 
 

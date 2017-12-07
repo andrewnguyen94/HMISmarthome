@@ -2,15 +2,11 @@
 #define ARRAYLIST_H
 
 #include <iostream>
-#include <QObject>
 using namespace std;
 
 class ArrayList{
 public:
-    ArrayList(){
-        head = NULL;
-        tail = NULL;
-    }
+    ArrayList();
     bool empty();
     int size();
     void createNode(std::basic_string<char,std::char_traits<char>,std::allocator<char>> obj);
@@ -28,6 +24,6 @@ private:
     };
     Node *head;
     Node *tail;
-}
+};
 
 #endif // ARRAYLIST_H

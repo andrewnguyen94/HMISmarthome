@@ -5,7 +5,6 @@
 
 #include <QComboBox>
 
-using namespace std ;
 Window::Window(MainWindow *mw) :
     mainWindow(mw)
 {

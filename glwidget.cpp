@@ -82,12 +82,12 @@ float GlWidget::getFov()
     return fov;
 }
 
-void GlWidget::setProjMatrix(QMatrix4x4 m_proj)
+void GlWidget::setProjMatrix(QMatrix4x4 *m_proj)
 {
     this->m_proj = m_proj;
 }
 
-QMatrix4x4 GlWidget::getProjMatrix()
+QMatrix4x4 *GlWidget::getProjMatrix()
 {
     return m_proj;
 }

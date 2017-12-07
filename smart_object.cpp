@@ -1,99 +1,103 @@
 #include "smart_object.h"
-#include <QPoint>
 
-
-//set id for smart object
-SmartObject::SmartObject(){
-
-}
-
-SmartObject::~SmartObject(){
-
-
-}
-
-void SmartObject::setId(int id)
+SmartObject::SmartObject(QOpenGLFunctions *f, QMatrix4x4 *world,QMatrix4x4 *camera, QMatrix4x4 *proj,
+             std::vector<glm::vec3> out_vertices, std::vector<glm::vec2> out_uvs, std::vector<glm::vec3> out_normal)
+    : function(f),
+     m_camera(camera),
+     m_world(world),
+     out_vertices(out_vertices),
+     out_uvs(out_uvs),
+     out_normals(out_normal),
+     m_count(0),
+     m_proj(proj)
 {
-    this->id = id;
+    initializeOpenGLFunctions();
+    initObjectGeometry();
+    m_program = new QOpenGLShaderProgram;
+
+// VAO binder
+    m_vao.create();
+    QOpenGLVertexArrayObject::Binder vaoBinder(&m_vao);
+
+//  buffer create
+    arrayBuf = new QOpenGLBuffer;
+    arrayBuf->create();
+    arrayBuf->bind();
+    arrayBuf->allocate(constData(), count() * sizeof(GLfloat));
 }
 
-//get the id of smart object
-int SmartObject::getId()
+SmartObject::~SmartObject()
 {
-    return this->id;
+
 }
 
-void SmartObject::setName(char *name_object)
+int SmartObject::setLocationShaderAtrrs(const char *shader_attrs)
 {
-    this->name = name_object;
+    return m_program->uniformLocation(shader_attrs);
 }
 
-char *SmartObject::getName()
+
+QOpenGLShaderProgram *SmartObject::getShaderProgram()
 {
-    return this->name;
+    return this->m_program;
 }
 
-//set source method for object. Load the mesh from obj, fbx file
-void SmartObject::setSource(QUrl url)
+void SmartObject::initObjectGeometry()
 {
-    Qt3DRender::QMesh::setSource(url);
+    m_data.resize(this->out_vertices.size() * 3 +
+                  this->out_uvs.size() * 2 +
+                  this->out_normals.size() * 3);
+    GLfloat *p = m_data.data() + m_count;
+    for(unsigned int i = 0; i < this->out_vertices.size(); i++){
+        *p++ = this->out_vertices[i].x;
+        *p++ = this->out_vertices[i].y;
+        *p++ = this->out_vertices[i].z;
+        *p++ = this->out_uvs[i].x;
+        *p++ = this->out_uvs[i].y;
+        *p++ = this->out_normals[i].x;
+        *p++ = this->out_normals[i].y;
+        *p++ = this->out_normals[i].z;
+        m_count += 8;
+    }
 }
 
-//get the entity that wrap the mesh
-Qt3DCore::QEntity* SmartObject::getParentEntity()
+QOpenGLBuffer *SmartObject::getArrayBuf()
 {
-    return entity;
+    return arrayBuf;
 }
 
-//set the entity that wrap the mesh
-void SmartObject::setParentEntity(Qt3DCore::QEntity *entity_parent)
+void SmartObject::draw(const char *drawMode)
 {
-    entity = entity_parent;
+    QOpenGLVertexArrayObject::Binder vaoBinder(&m_vao);
+    m_program->bind();
+    if(strcmp(drawMode,"GL_TRIANGLES") == 0){
+        glDrawArrays(GL_TRIANGLES, 0, vertexCount());
+    }else if(strcmp(drawMode, "GL_TRIANGLE_STRIP") == 0){
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, vertexCount());
+    }else if(strcmp(drawMode, "GL_LINES") == 0){
+        glDrawArrays(GL_LINES, 0, vertexCount());
+    }else if(strcmp(drawMode, "GL_POINTS") == 0){
+        glDrawArrays(GL_POINTS, 0, vertexCount());
+    }
+    m_program->release();
 }
 
-Qt3DCore::QTransform *SmartObject::createTransform()
+//type is source type, exp: vertex, fragment. 0 is vertex, 1 is fragment
+void SmartObject::addShaderFromSourceCode(int type, const char *source)
 {
-    Qt3DCore::QTransform *new_transform;
-    new_transform = new Qt3DCore::QTransform();
-    return new_transform;
+    if(type == 0){
+        m_program->addShaderFromSourceCode(QOpenGLShader::Vertex, source);
+    }else if(type == 1){
+        m_program->addShaderFromSourceCode(QOpenGLShader::Fragment, source);
+    }
 }
 
-void SmartObject::setTransform(Qt3DCore::QTransform *transform_add)
+//type is source type, exp: vertex, fragment. 0 is vertex, 1 is fragment
+void SmartObject::addShaderFromFile(int type, const char *path)
 {
-    transform = transform_add;
+    if(type == 0){
+        m_program->addShaderFromSourceFile(QOpenGLShader::Vertex, path);
+    }else if(type == 1){
+        m_program->addShaderFromSourceFile(QOpenGLShader::Fragment, path);
+    }
 }
-
-Qt3DCore::QTransform *SmartObject::getTransform()
-{
-    return transform;
-}
-
-Qt3DRender::QMaterial *SmartObject::createMaterial()
-{
-    Qt3DRender::QMaterial *new_material;
-    new_material = new Qt3DRender::QMaterial();
-    return new_material;
-}
-
-void SmartObject::setMaterial(Qt3DRender::QMaterial *material_set)
-{
-    material = material_set;
-}
-
-Qt3DRender::QMaterial *SmartObject::getMaterial()
-{
-    return material;
-}
-
-//convert mesh's world coordinates into window coordinates and return the location of mesh on window coordinates
-//QVector2D SmartObject::getPos(QMatrix projectionMatrix, QMatrix viewMatrix, QVector3D point3D, QVector2D viewSize,
-//                           QVector2D viewOffset)
-//{
-//    QVector4D clipSpacePos = projectionMatrix * (viewMatrix * QVector4D(point3D, 1.0));
-//    QVector3D ndcSpacePos = clipSpacePos.xyz / clipSpacePos.w;
-//    QVector2D windowSpacePos = ((ndcSpacePos.xy + 1.0) / 2.0) * viewSize + viewOffset;
-//    return windowSpacePos;
-//}
-
-//get the local of object
-

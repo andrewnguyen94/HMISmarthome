@@ -14,7 +14,8 @@ using namespace std;
 class LightBulb : protected QOpenGLFunctions
 {
 public:
-    LightBulb(std::vector<glm::vec3> out_vertices, std::vector<glm::vec2> out_uvs, std::vector<glm::vec3> out_normals);
+    LightBulb(std::vector<glm::vec3> out_vertices, std::vector<glm::vec2> out_uvs, std::vector<glm::vec3> out_normals,
+              QOpenGLFunctions *f, QMatrix4x4 *world,QMatrix4x4 *camera);
     virtual ~LightBulb();
 
     const GLfloat *constData() const { return m_data.constData(); }
@@ -42,7 +43,6 @@ private:
     QString name_object;
     int object_id;
 
-protected:
 };
 
 #endif // LIGHTBULB_H

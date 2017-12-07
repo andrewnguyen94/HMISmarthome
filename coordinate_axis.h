@@ -10,7 +10,7 @@
 #include <QOpenGLShaderProgram>
 #include <qmatrix4x4.h>
 
-class Coordinate_Axis : public QOpenGLFunctions
+class Coordinate_Axis : protected QOpenGLFunctions
 {
 public:
     Coordinate_Axis(QOpenGLFunctions *f, qreal x, qreal y, qreal z, QMatrix4x4 world);

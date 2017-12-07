@@ -1,11 +1,15 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "glwidget.h"
-
 #include <qwidget.h>
 
+using namespace std;
+QT_BEGIN_NAMESPACE
+class QComboBox;
+QT_END_NAMESPACE
+
 class MainWindow;
+class GlWidget;
 
 class Window : public QWidget
 {
